@@ -36,7 +36,8 @@ const currentLanguage = localStorage.getItem('language') || 'tr';
 
 setLanguage(currentLanguage);
 
-languageBtn.addEventListener('click', () => {
+languageBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     languageDropdown.classList.toggle('active');
 });
 
@@ -113,4 +114,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+
+document.addEventListener('click', (event) => {
+    if (!languageBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
+        languageDropdown.classList.remove('active');
+    }
 });
